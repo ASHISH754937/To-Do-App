@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Caladea:ital@1&display=swap');
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.caladea-regular-italic {
+    font-family: "Caladea", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Global Styles */
+body {
+    margin: 0;
+    background: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+}
+
+.Logo {
+    font-weight: bold;
+    font-size: 20px;
+    color: #000000; /* Black */
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.Logo:hover {
+    background-color: #000000; /* Black */
+    color: #ffffff; /* White */
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation */
+.nav__links {
+    display: flex;
+    gap: 15px;
+    list-style: none; /* Removes black dots */
+    padding: 0;
+    margin: 0;
+}
+.nav__links li input[type="date"] {
+    font-size: 18px;  /* Bigger text */
+    padding: 1px 10px; /* Adjust spacing */
+    border: 2px solid black; /* Match the theme */
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.nav__links li a {
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav__links li a:hover {
+    background-color: black;
+    color: white;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Separator */
+.separator {
+    width: 100%;
+    height: 5px;
+    background:  black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Section */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    max-width: 2000px;
+    height: 75vh;
+    min-height: 500px;
+    overflow-y: auto;
+    position: relative;
+    border: 2px solid #000;
+    margin: 0 auto;
+    padding: 23px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Task Input & Button Section */
+
+.add-task-section {
+    display: inline;
+    gap: 10px;
+    
+    width: 100%;
+    max-width: 800px;  /* Set a width similar to the table */
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+.add-task-section input {
+    flex: 1;
+    width: 100%;
+    padding: 15px;  /* Increase padding for a larger look */
+    font-size: 18px;  /* Increase text size */
+    border: 2px solid black;
+    border-radius: 5px;
+   
+}
+
+.add-task-section button {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 15px;
+    border: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline;
+}
+.f
+{
+    display: flex;
+}
+
+.add-task-section button:hover {
+    background-color: darkgray;
+}
+
+.add {
+    height: 50px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #ffffff; /* White */
+    background: #000000; /* Black */
+    border: 2px solid #000000; /* Black */
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0px #000000;
+    position: relative;
+    user-select: none;
+    display: inline;
+}
+
+.add:hover {
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.add:active {
+    box-shadow: none;
+    top: 3px;
+    left: 3px;
+}
+
+/* Task Table */
+.AddedTasks {
+    width: 100%;
+    max-width: 1000px;
+    background-color: white;
+    padding: 20px;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #000000; /* Black */
+    color: white;
+}
+
+td input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Task Item */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 10px;
+    background: #000000; /* Black */
+    border-radius: 15px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.action-buttons {
+
+    gap: 25px;  /* Space between buttons */
+    display: grid;
+    align-items: center;
+    place-items: center;/* Align vertically */
+}
+
+button {
+    padding: 12px 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+
+.complete-btn {
+
+    background-color: #000000; 
+    color: white;
+    
+}
+.completed-text {
+    font-weight: bold;
+
+}
+.delete-btn {
+    background-color: #000000;
+    color: white;
+   
+}
+
+
+.complete-btn:hover {
+    background-color: #218838;
+}
+
+.delete-btn:hover {
+    background-color: #b64545;
+    color: whitesmoke;
+}

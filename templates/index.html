@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='indexstyle.css') }}"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caladea:ital@1&family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="Logo"><h2>To-Do List</h2></div> 
+        <nav class="navbar">  
+            <ul class="nav__links">
+                <li><input type="date" id="dateInput" readonly></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('showhistory') }}">Completed Tasks</a></li>
+                <li><a href="{{ url_for('aboutsection') }}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="separator"></div>
+    <div><h3></h3></div>
+  
+    <div class="main">  
+        <!-- Form for Adding Tasks -->
+        <div class="add-task-section" width="100px">
+            <form method="POST" class="f">
+                <input type="text" name="task" placeholder="Enter a new task" required>
+                <button type="submit" class="add">Add Task</button>
+            </form>
+        </div>
+
+        <!-- Display Added Tasks -->
+        <div class="AddedTasks">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Task</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if alltodo %}
+                        {% for todo in alltodo %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ todo.Task }}</td>
+                            <td>{{ todo.Status }}</td>
+                            <td>{{ todo.Date.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>
+                                {% if todo.Status == "Pending" %}
+                                    <form action="{{ url_for('complete_task', srno=todo.SrNo) }}" method="post" style="display:inline;">
+                                        <button type="submit" class="complete-btn">✔ Complete</button>
+                                    </form>
+                                    <form action="{{ url_for('delete_task', srno=todo.SrNo) }}" method="post" style="display:inline;">
+                                        <button type="submit" class="delete-btn">✖ Delete</button>
+                                    </form>
+                                {% else %}
+                                    <span class="completed-text">✔ Completed</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="empty-message">No tasks added yet. Start by adding one above! 🚀 Remember Consistency is the key...</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("dateInput").valueAsDate = new Date();
+    </script>
+</body>
+</html>

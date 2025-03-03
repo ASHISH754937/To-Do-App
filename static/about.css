@@ -1,0 +1,144 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Caladea:ital@1&display=swap');
+
+/* Global Styles */
+body {
+    margin: 0;
+    background: #fff;
+    color: #000;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background: #fff;
+    border-bottom: 2px solid black;
+}
+
+/* Logo */
+.Logo {
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 2px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.Logo:hover {
+    background: black;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.nav__links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav__links li input[type="date"] {
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.nav__links li a {
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+}
+
+.nav__links li a:hover {
+    background: black;
+    color: white;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.separator {
+    width: 100%;
+    height: 5px;
+    background: black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Contact Page */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem;
+}
+
+/* Profile Section */
+.profile-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.profile-photo img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+/* About Me */
+.about-me h2, .contact-details h2 {
+    font-size: 24px;
+    margin-bottom: 1rem;
+}
+
+.about-me p {
+    max-width: 800px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Contact Details */
+.contact-links {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-links li {
+    margin: 0.5rem 0;
+}
+
+.contact-links a {
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-links a:hover {
+    color: #0077b5; /* Blue highlight */
+}

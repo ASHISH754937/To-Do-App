@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Tasks - To-Do List</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='indexstyle.css') }}"> 
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caladea:ital@1&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h2>To-Do List</h2>
+        </div> 
+        <nav class="navbar">  
+            <ul class="nav__links">
+                <li><input type="date" id="dateInput" readonly></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('showhistory') }}">Completed Tasks</a></li>
+                <li><a href="{{ url_for('aboutsection') }}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Separator -->
+    <div class="separator"></div>
+
+    <!-- Page Title -->
+    <div class="page-title">
+        <h3>Completed Tasks History</h3>
+    </div>
+
+    <!-- Filter Form for Selecting Date -->
+    <div class="filter-container">
+        <form method="GET" action="{{ url_for('showhistory') }}">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" value="{{ selected_date }}">
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+    <!-- Completed Tasks Table -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Completion Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in completed_tasks %}
+                <tr>
+                    <td>{{ todo.SrNo }}</td>
+                    <td>{{ todo.Task }}</td>
+                    <td>{{ todo.Status }}</td>
+                    <td>
+                        {% if todo.CompletedDate %}
+                            {{ todo.CompletedDate.strftime('%Y-%m-%d %H:%M:%S') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
