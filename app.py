@@ -69,12 +69,11 @@ def complete_task(srno):
 @app.route("/delete/<int:srno>", methods=['POST'])
 def delete_task(srno):
     todo = Todo.query.get_or_404(srno)
-    if todo.Status == 'Completed':  # ✅ Fixed here
-        return "Completed tasks cannot be deleted.", 403  # Prevent deletion
     
-    db.session.delete(todo)
+    db.session.delete(todo)  # Remove task regardless of status
     db.session.commit()
-    return redirect(url_for('home'))  
+    
+    return redirect(url_for('home'))   
 
 
 @app.route("/Completed", methods=['GET'])
