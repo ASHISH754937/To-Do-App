@@ -1,25 +1,29 @@
+import os
 import pymysql
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import urllib.parse
+from dotenv import load_dotenv  
+from sqlalchemy.sql import func 
+
+load_dotenv()
 
 app = Flask(__name__)
 
-# Database setup
-mydb = pymysql.connect(
-    host="localhost",
-    user="root",
-    password="Rajeev@1"
-)
+DB_HOST = os.getenv("MYSQLHOST", "mysql.railway.internal")
+DB_USER = os.getenv("MYSQLUSER", "root")
+DB_PASSWORD = os.getenv("MYSQLPASSWORD")  
+DB_NAME = os.getenv("MYSQLDATABASE", "railway")
+DB_PORT = os.getenv("MYSQLPORT", "3306")
 
-my_cursor = mydb.cursor()
-my_cursor.execute("CREATE DATABASE IF NOT EXISTS History")
-my_cursor.execute("SHOW DATABASES")
+# ✅ Secure password encoding
+password = urllib.parse.quote_plus(DB_PASSWORD)
 
 
-password = urllib.parse.quote_plus("Rajeev@1")
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{password}@localhost/History"
+password = urllib.parse.quote_plus(DB_PASSWORD)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USER}:{password}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -30,10 +34,11 @@ class Todo(db.Model):
     Task = db.Column(db.String(250), nullable=False)
     Date = db.Column(db.DateTime, default=datetime.utcnow)
     Status = db.Column(db.String(50), default='Pending')
-    CompletedDate = db.Column(db.DateTime, nullable=True)  
+    CompletedDate = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         return f"{self.SrNo}, {self.Task}, {self.Status}"
+
     
 
 @app.route("/", methods=['GET', 'POST'])
@@ -71,7 +76,7 @@ def delete_task(srno):
     
     db.session.delete(todo)
     db.session.commit()
-    return redirect(url_for('home'))  # ✅ Fixed function name
+    return redirect(url_for('home'))  
 
 
 @app.route("/Completed", methods=['GET'])
