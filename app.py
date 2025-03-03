@@ -21,8 +21,6 @@ DB_PORT = os.getenv("MYSQLPORT", "3306")
 password = urllib.parse.quote_plus(DB_PASSWORD)
 
 
-password = urllib.parse.quote_plus(DB_PASSWORD)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USER}:{password}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -71,7 +69,7 @@ def complete_task(srno):
 @app.route("/delete/<int:srno>", methods=['POST'])
 def delete_task(srno):
     todo = Todo.query.get_or_404(srno)
-    if Todo.Status == 'Completed':
+    if todo.Status == 'Completed':  # ✅ Fixed here
         return "Completed tasks cannot be deleted.", 403  # Prevent deletion
     
     db.session.delete(todo)
@@ -81,17 +79,21 @@ def delete_task(srno):
 
 @app.route("/Completed", methods=['GET'])
 def showhistory():
-    # Get filter date from the URL query parameters
     filter_date = request.args.get('date')
     selected_date = request.args.get('date', '')
-    # If a specific date is selected, filter by that date
+
     if selected_date:
-        completed_tasks = Todo.query.filter(
-            Todo.Status == "Completed",
-            db.func.date(Todo.CompletedDate) == selected_date
-        ).all()
+        try:
+            selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()  
+            completed_tasks = Todo.query.filter(
+                Todo.Status == "Completed",
+                func.date(Todo.CompletedDate) == selected_date
+            ).all()
+        except ValueError:
+            completed_tasks = []
     else:
         completed_tasks = Todo.query.filter(Todo.Status == "Completed").all()
+        
     return render_template('completed.html', completed_tasks=completed_tasks, selected_date=filter_date)
 
 
